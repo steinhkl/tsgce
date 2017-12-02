@@ -35,7 +35,7 @@ def main():
     userInput = input()
     
     try:
-        nltk.data.find("tokenizers/punkt.zip")
+        nltk.data.find("tokenizers/punkt")
         nltk.data.find("corpora/brown.zip")
         nltk.data.find("corpora/masc_tagged.zip")
     except:
