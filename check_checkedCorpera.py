@@ -36,7 +36,7 @@ def main():
     
     try:
         nltk.data.find("tokenizers/punkt")
-        nltk.data.find("corpora/brown.zip")
+        nltk.data.find("corpora/brown")
         nltk.data.find("corpora/masc_tagged.zip")
     except:
         print("Loading missing libraries.")
@@ -50,6 +50,7 @@ def main():
     sentence_tokens = nltk.word_tokenize(userInput)
     corpera = [nltk.corpus.brown, nltk.corpus.masc_tagged]
  
+    print("Performing the check")
     for corpus in corpera:
         corpus_thread = CorpusCheckThread(corpus, sentence_tokens, resultList)
         corpus_thread.start()
