@@ -57,7 +57,6 @@ def genlist(sentencestocheck):
     return listofsentences
     
 def main():
-
     #Check for missing resources
     try:
         nltk.data.find("averaged_perceptron_tagger")
