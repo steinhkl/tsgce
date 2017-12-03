@@ -2,6 +2,7 @@
 
 import threading
 import nltk
+import sys  
 from nltk.util import ngrams
 
 class CorpusCheckThread (threading.Thread):
@@ -31,8 +32,11 @@ def generate_N_ngrams_of_sentence(word_tokens):
 def main():
     resultList = []
     threads = []
-    print("Please give me the sentence you want to get checked:")
-    userInput = input()
+    if sys.argv[1]:
+        userInput = sys.argv[1]
+    else:
+        print("Please give me the sentence you want to get checked:")
+        userInput = input()
     
     try:
         nltk.data.find("tokenizers/punkt")
@@ -63,6 +67,7 @@ def main():
         print("Your sentence is correct")
     else:
         print("Function of second group will be called")
+        sys.exit(1)
 
 if __name__ == "__main__":
         main()
