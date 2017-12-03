@@ -31,8 +31,11 @@ def main():
         for line in output.splitlines():
             pass
         last = line
-        liste = ast.literal_eval(last.decode('utf-8'))
+        listofsentences = ast.literal_eval(last.decode('utf-8'))
         
+        # THIS IS WHAT NEXT GROUP USES
+        print(listofsentences)
+
         
 if __name__ == "__main__":
         main()
