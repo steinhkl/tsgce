@@ -7,7 +7,7 @@ import tagandroll
 
 def main():
 
-    if sys.argv[1]:
+    if len(sys.argv) > 1:
         userInput = sys.argv[1]
     else:
         print("Please give me the sentence you want to get checked:")
