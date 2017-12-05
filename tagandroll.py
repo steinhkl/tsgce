@@ -34,16 +34,21 @@ def createsentence(sentence, wordformed, index):
 # Function to create a list of sentences with changed verbs
 def inflictverbs(sentencestocheck):
     outlist = []
+    verbfound = False
     #For all sentences to change
     for sentence in sentencestocheck:
         i = 0
+
         # Check every tag of sentence
         for word in sentencestocheck[sentence]:
             # Look for Verbs
             if word[1][0] == 'V':
+                verbfound = True
                 for alias in formaliases:
                     outlist.append(createsentence(sentencestocheck[sentence], conjugate(word[0], alias), i))
             i = i + 1
+    if verbfound == False:
+        print("No verb found, returning empty list")
 
     return outlist
 
