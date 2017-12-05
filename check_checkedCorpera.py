@@ -29,11 +29,11 @@ def generate_N_ngrams_of_sentence(word_tokens):
 
     return N_ngrams
 
-def main():
+def main(inputtext):
     resultList = []
     threads = []
-    if sys.argv[1]:
-        userInput = sys.argv[1]
+    if inputtext !="":
+        userInput = inputtext
     else:
         print("Please give me the sentence you want to get checked:")
         userInput = input()
@@ -65,9 +65,10 @@ def main():
     
     if True in resultList:
         print("Your sentence is correct")
+        return 0
     else:
         print("Function of second group will be called")
-        sys.exit(1)
+        return 1
 
 if __name__ == "__main__":
-        main()
+        main("")

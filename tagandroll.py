@@ -8,14 +8,13 @@ from pattern.en import conjugate
 formaliases = ["inf", "1sg", "2sg", "3sg", "pl", "part", "1sgp", "2sgp", "3sgp", "ppl", "ppart"]
 
 # This comes from First group in some way
-intext = "The dog walks away."
+inputtext = "The dog walks away."
 
 # Create sentance given tagged text, the word to be changed and the index of it
-def createsentence(sentance, wordformed, index):
+def createsentence(sentence, wordformed, index):
     out = ""
     i = 0
-    for word in sentance:
-        
+    for word in sentence:
         # If the current word is subject to change, change it
         if i == index:
             out+=" "+wordformed
@@ -56,7 +55,7 @@ def genlist(sentencestocheck):
 
     return listofsentences
     
-def main():
+def main(intext):
     #Check for missing resources
     try:
         nltk.data.find("averaged_perceptron_tagger")
@@ -74,8 +73,8 @@ def main():
     sentenceforms = genlist(sentencestocheck)
 
     # This goes to next group
-    print(sentenceforms)
+    return sentenceforms
 
 
 if __name__ == "__main__":
-        main()
+        main(inputtext)
