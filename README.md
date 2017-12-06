@@ -5,6 +5,11 @@ Tiny Statistical Grammar Checking Engine
 ## Dependencies
 ### NLTK
 [NLTK](http://www.nltk.org/)
+
+```
+pip install nltk
+```
+
 ### Pattern
 
 This Programm depends on the development branch of the [pattern](https://github.com/clips/pattern/) module. To install it, use following commands:
