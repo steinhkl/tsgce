@@ -6,13 +6,21 @@ from bs4 import BeautifulSoup
 def parsegooglehtml(searchstring):
     searchstring = '"'+searchstring+'"'
     r = requests.get("https://www.google.com/search", params={'q':searchstring,'nfpr':1})
-    soup = BeautifulSoup(r.text, "lxml")
-    res = soup.find("div", {"id": "resultStats"})
-    try:
-        result = int(res.text.replace(".", "").split()[1])
-    except:
-        result = 1
-    return result
+    # check for rate limit
+    if r.status_code == 503:
+        print("You have reached the rate limit. Please wait.")
+        return -1
+        pass
+    else:
+        # else parse output
+        soup = BeautifulSoup(r.text, "lxml")
+        res = soup.find("div", {"id": "resultStats"})
+        try:
+            result = int(res.text.replace(".", "").split()[1])
+        except:
+            result = 1
+        return result
+
     pass
 
 
