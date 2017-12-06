@@ -2,7 +2,7 @@
 
 import threading
 import nltk
-import sys  
+import sys
 from nltk.util import ngrams
 
 class CorpusCheckThread (threading.Thread):
@@ -22,7 +22,7 @@ class CorpusCheckThread (threading.Thread):
 
 def generate_N_ngrams_of_sentence(word_tokens):
     N_ngrams = list()
-    
+
     for i in range(len(word_tokens)):
         n = i+1
         N_ngrams.append(ngrams(word_tokens, n))
@@ -37,11 +37,11 @@ def main(inputtext):
     else:
         print("Please give me the sentence you want to get checked:")
         userInput = input()
-    
+
     try:
         nltk.data.find("tokenizers/punkt")
         nltk.data.find("corpora/brown")
-        nltk.data.find("corpora/masc_tagged.zip")
+        nltk.data.find("corpora/masc_tagged")
     except:
         print("Loading missing libraries.")
         nltk.download("punkt")
@@ -50,10 +50,10 @@ def main(inputtext):
         print("Finished downloading.")
         sentence_tokens = nltk.word_tokenize(userInput)
         corpera = [nltk.corpus.brown, nltk.corpus.masc_tagged]
-  
+
     sentence_tokens = nltk.word_tokenize(userInput)
     corpera = [nltk.corpus.brown, nltk.corpus.masc_tagged]
- 
+
     print("Performing the check")
     for corpus in corpera:
         corpus_thread = CorpusCheckThread(corpus, sentence_tokens, resultList)
@@ -62,7 +62,7 @@ def main(inputtext):
 
     for check_threads in threads:
         check_threads.join()
-    
+
     if True in resultList:
         print("Your sentence is correct")
         return 0

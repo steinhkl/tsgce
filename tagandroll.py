@@ -18,7 +18,7 @@ def createsentence(sentence, wordformed, index):
         # If the current word is subject to change, change it
         if i == index:
             out+=" "+wordformed
-        
+
         # Dont add space before punctiation
         elif word[1] == '.':
             out+=word[0]
@@ -27,9 +27,9 @@ def createsentence(sentence, wordformed, index):
         else:
             out+=" "+word[0]
 
-        i+=1    
+        i+=1
     out = out[1:]
-    return out 
+    return out
 
 # Function to create a list of sentences with changed verbs
 def inflictverbs(sentencestocheck):
@@ -59,11 +59,11 @@ def genlist(sentencestocheck):
 
 
     return listofsentences
-    
+
 def main(intext):
     #Check for missing resources
     try:
-        nltk.data.find("averaged_perceptron_tagger")
+        nltk.data.find("taggers/averaged_perceptron_tagger")
     except:
         print("Loading missing libraries.")
         nltk.download("averaged_perceptron_tagger")
@@ -72,7 +72,7 @@ def main(intext):
     #Tag input Text
     taggedtext = nltk.word_tokenize(intext)
     taggedtext = nltk.pos_tag(taggedtext)
-    
+
     # Generate variations of sentence
     sentencestocheck = {intext : taggedtext}
     sentenceforms = genlist(sentencestocheck)
