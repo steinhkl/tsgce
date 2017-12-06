@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-
+import zipfile
 import threading
 import nltk
 import sys
@@ -29,6 +29,13 @@ def generate_N_ngrams_of_sentence(word_tokens):
 
     return N_ngrams
 
+def uglyunpack():
+        # nltk.download does not extract and the extract function does not work... :(
+        nltk_data_path = nltk.data.path[0]
+        zip_ref = zipfile.ZipFile(nltk_data_path+'/corpora/masc_tagged.zip','r')
+        zip_ref.extractall(nltk_data_path+'/corpora/')
+        zip_ref.close()
+
 def main(inputtext):
     resultList = []
     threads = []
@@ -37,7 +44,6 @@ def main(inputtext):
     else:
         print("Please give me the sentence you want to get checked:")
         userInput = input()
-
     try:
         nltk.data.find("tokenizers/punkt")
         nltk.data.find("corpora/brown")
@@ -47,6 +53,7 @@ def main(inputtext):
         nltk.download("punkt")
         nltk.download("brown")
         nltk.download("masc_tagged")
+        uglyunpack()
         print("Finished downloading.")
         sentence_tokens = nltk.word_tokenize(userInput)
         corpera = [nltk.corpus.brown, nltk.corpus.masc_tagged]
