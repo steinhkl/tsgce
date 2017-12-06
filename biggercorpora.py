@@ -11,18 +11,18 @@ def parsegooglehtml(searchstring):
     pass
 
 
-def main(listofsentences):
+def main(jsonlistofsentences):
     # create a dictionary for the results:
     parsehtmlresults = {}
 
     # here we work on our sentences
-    for sentence in listofsentences:
+    for idx, form in enumerate(jsonlistofsentences["forms"]):
         # send all senteces to google and parse resulting HTML file
-        parsehtmlresults[sentence] = parsegooglehtml(sentence)
+        jsonlistofsentences[idx]["googlehits"] = parsegooglehtml(form["sentence"])
         pass
 
     # Order by Number of results.
-    parsehtmlresults = sorted(parsehtmlresults.items(), key=lambda x:x[1], reverse=True)
+    jsonlistofsentences["forms"] = sorted(jsonlistofsentences["forms"], key=lambda x:x["googlehits"], reverse=True)
 
     # return sorted key:value pairs
     return parsehtmlresults

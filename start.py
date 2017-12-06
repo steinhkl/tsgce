@@ -25,10 +25,10 @@ def main():
         # start group 3
         # remove duplicates but keep order
         # source https://stackoverflow.com/questions/7961363/removing-duplicates-in-lists
-        listwithoutduplicates = OrderedDict((x, True) for x in listofsentences).keys()
+        #listwithoutduplicates = OrderedDict((x, True) for x in listofsentences).keys()
         # call group3 python program
-        ranking = biggercorpora.main(listwithoutduplicates)
-        print(ranking)
+        listofsentences = biggercorpora.main(listofsentences)
+        print(listofsentences)
 
 
 
