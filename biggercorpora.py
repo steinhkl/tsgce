@@ -4,7 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 
 def parsegooglehtml(searchstring):
-    r = requests.get("https://www.google.com/search", params={'q':searchstring})
+    r = requests.get("https://www.google.com/search", params={'q':searchstring,'nfpr':1})
     soup = BeautifulSoup(r.text, "lxml")
     res = soup.find("div", {"id": "resultStats"})
     return int(res.text.replace(".", "").split()[1])
