@@ -11,14 +11,28 @@ def parsegooglehtml(searchstring):
         print("You have reached the rate limit. Please wait.")
         return -1
         pass
+
     else:
-        # else parse output
+        # parse HTML output.
         soup = BeautifulSoup(r.text, "lxml")
+
+        # Don't be fooled by suggested results.
+        # TODO: This probably does not work outside of germany
+        # edit to text="No resulst for " if google returns unlikely numbers.
+        if soup.find(text="Keine Ergebnisse für "):
+            print("No results found")
+            return 0
+            pass
+
+        # find the div which contains number of results
         res = soup.find("div", {"id": "resultStats"})
         try:
+            # if there is more than 1 result the query will return:
+            # "About XXXX results"
             result = int(res.text.replace(".", "").split()[1])
         except:
-            result = 1
+            # otherwise it will return "1 Result"
+            result = int(res.text.replace(".", "").split()[0])
         return result
 
     pass
