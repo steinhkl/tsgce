@@ -1,0 +1,7 @@
+nltk
+numpy
+bs4
+lxml
+google-api-python-client
+scipy
+six

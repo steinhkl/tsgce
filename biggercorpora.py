@@ -10,7 +10,7 @@ def parsegooglehtml(searchstring):
     r = requests.get("https://www.google.com/search", params={'q':searchstring,'nfpr':1})
     # check for rate limit
     if r.status_code == 503:
-        print("You have reached the rate limit. Please wait.")
+        print("You have reached the WEB rate limit. Please wait.")
         return -1
         pass
 
@@ -44,7 +44,7 @@ def queryGoogleCSEApi(searchstring):
     devKey = open("google-api-key.txt").read().strip()
     # build API Service
     service = build("customsearch", "v1", developerKey=devKey)
-    # Specify Custom Search Engine. 
+    # Specify Custom Search Engine.
     cseKey = "014193703923044144161:os4pqh4une0"
     res = service.cse().list(q=searchstring,cx=cseKey,).execute()
     return (res.get('searchInformation').get('totalResults'))
