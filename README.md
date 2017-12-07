@@ -1,6 +1,13 @@
 # tsgce
 Tiny Statistical Grammar Checking Engine
 
+## Usage
+
+The program is launched by starting "start.py":
+``` bash
+./start.py "This is my test sentence."
+```
+
 ## Installing
 
 See Install instructions in INSTALL.md
