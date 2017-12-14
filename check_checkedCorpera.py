@@ -20,11 +20,54 @@ class CorpusCheckThread (threading.Thread):
         else:
             self.run_is_ngram()
 
+    # check each a s sentence for a specific ngram
+    # generate n ngram from sentence
+    # generate string representation of sentence ngram
+    # and compare
+    def check_ngram_in_sentence(self, sentence, str_ngram, n):
+        sentence_ngrams = list(ngrams(sentence, n))
+        for sentence_ngram in sentence_ngrams:
+            str_sentence_ngram = '#'.join(sentence_ngram)
+            if str_ngram == str_sentence_ngram:
+                return True
+        return False
+
+    # check ngram in whole copera (all sentences in corpera)
+    def check_ngram_in_corpera(self, str_ngram):
+        n = str_ngram.count('#') + 1
+        ret = False
+        # check each sentence in corpera for a ngram
+        for sentence in self.corpus.sents():
+            if self.check_ngram_in_sentence(sentence, str_ngram, n):
+                ret = True
+                break
+        return ret
+
+
+
     def run_is_ngram(self):
         in_ngrams = self.input_sentence
         ngram_positive_dict = dict()
         ngram_negative_dict = dict()
         l = len(in_ngrams[0])
+
+        # iterate through all ngram in input_sentence (in_ngrams)
+        # and compare each tuple of in_grams with each ngram from sentence
+        # iterate over all ngrams in_sentence: (in_ngram)
+        # generate a string representative for each in_ngram
+        # and compare string representation of in_ngram with
+        # each string representation of corpus_sentence
+
+        for in_ngram in in_ngrams:
+            str_in_ngram = '#'.join(in_ngram)
+            if str_in_ngram in ngram_negative_dict:
+                continue
+            if self.check_ngram_in_corpera(str_in_ngram):
+                ngram_positive_dict[str_in_ngram] = True
+            else:
+                ngram_negative_dict[str_in_ngram] = False
+                self.outputList.append(in_ngram)
+        '''
         for s in self.corpus.sents():
             s_ngrams = list(ngrams(s, l))
             for s_ngram in s_ngrams:
@@ -40,6 +83,7 @@ class CorpusCheckThread (threading.Thread):
                         if not str_ngram in ngram_negative_dict:
                             ngram_negative_dict[str_ngram] = True
                             self.outputList.append(ngram)
+        '''
 
     def run_is_sentence(self):
         return_Value = False
@@ -101,7 +145,7 @@ def main(inputtext):
         return 0
     else:
         resultList = []
-        n_grams = generate_N_ngrams_of_sentence(corpera, sentence_tokens, resultList)
+        generate_N_ngrams_of_sentence(corpera, sentence_tokens, resultList)
         for result in resultList:
             print(result)
         print("Function of second group will be called")
