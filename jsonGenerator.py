@@ -1,6 +1,6 @@
 import json
 
-class jsonGenerate():
+class JsonGenerator():
     def __init__(self, userInput):
         self.__jsonDict = dict()
         self.__userInput = userInput
@@ -13,25 +13,21 @@ class jsonGenerate():
         self.__jsonDict["tagged"] = self.__tagged
         self.__jsonDict["forms"] = self.__forms
 
-        print(json.dumps(self.__jsonDict))
+    def generate_json_ngram(self, ngrams_dict):
+        for n_in_ngram, ngrams in ngrams_dict.items():
+           tmp = dict()
+           tmp["error_in"] = int(n_in_ngram)
+           tmp["ngram"] = list(ngrams)
+           self.__jsonDict["ngrams"].append(tmp)
 
-    # ngram : (dict(errorin_ ngram))
-    def generate_ngram(self, n, ngram):
-        print("generate_ngram")
+    def save(self):
+        path="tmp/results.json"
+        with open(path,"w") as f:
+            f.write(self.print_json(False))
 
-        while len(self.__ngrams) < n:
-            self.__ngrams.append([])
-
-        self.__ngrams[n-1].append(ngram)
-
-
-jg = jsonGenerate("hello world")
-ngram = dict()
-ngram["error_in"] = 2
-ngram["ngram"] = []
-
-jg.generate_ngram(1, ngram)
-
-
-print(json.dumps(ngram))
+    def print_json(self, output=True):
+        ret = json.dumps(self.__jsonDict, indent=4)
+        if output:
+            print(ret)
+        return ret
 

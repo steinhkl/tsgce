@@ -3,7 +3,7 @@ import os
 import threading
 import nltk
 from nltk.util import ngrams
-from jsonGenerator import jsonGenerate
+from jsonGenerator import JsonGenerator
 
 
 class CorpusCheckThread (threading.Thread):
@@ -13,6 +13,7 @@ class CorpusCheckThread (threading.Thread):
         self.input_sentence =  input_sentence
         self.outputList = outputList
         self.is_sentence = is_sentence
+        self.ngrams_errors = dict()
 
     def run(self):
         if self.is_sentence:
@@ -26,30 +27,31 @@ class CorpusCheckThread (threading.Thread):
     # and compare
     def check_ngram_in_sentence(self, sentence, str_ngram, n):
         sentence_ngrams = list(ngrams(sentence, n))
+
         for sentence_ngram in sentence_ngrams:
-            str_sentence_ngram = '#'.join(sentence_ngram)
+            str_sentence_ngram = '#'.join(sentence_ngram).lower()
             if str_ngram == str_sentence_ngram:
                 return True
+
         return False
 
     # check ngram in whole copera (all sentences in corpera)
     def check_ngram_in_corpera(self, str_ngram):
         n = str_ngram.count('#') + 1
         ret = False
+
         # check each sentence in corpera for a ngram
         for sentence in self.corpus.sents():
             if self.check_ngram_in_sentence(sentence, str_ngram, n):
                 ret = True
                 break
+
         return ret
-
-
 
     def run_is_ngram(self):
         in_ngrams = self.input_sentence
         ngram_positive_dict = dict()
         ngram_negative_dict = dict()
-        l = len(in_ngrams[0])
 
         # iterate through all ngram in input_sentence (in_ngrams)
         # and compare each tuple of in_grams with each ngram from sentence
@@ -62,36 +64,27 @@ class CorpusCheckThread (threading.Thread):
             str_in_ngram = '#'.join(in_ngram)
             if str_in_ngram in ngram_negative_dict:
                 continue
+
             if self.check_ngram_in_corpera(str_in_ngram):
                 ngram_positive_dict[str_in_ngram] = True
             else:
-                ngram_negative_dict[str_in_ngram] = False
+                ngram_negative_dict[str_in_ngram] = True
+                n_in_ngram = len(in_ngram)
+                key = str(n_in_ngram)
+
+                if not key in self.ngrams_errors:
+                    self.ngrams_errors[key] = list()
+
+                self.ngrams_errors[str(n_in_ngram)].append(in_ngram)
                 self.outputList.append(in_ngram)
-        '''
-        for s in self.corpus.sents():
-            s_ngrams = list(ngrams(s, l))
-            for s_ngram in s_ngrams:
-                str_s_ngram = ''.join((s_ngram))
-                for ngram in in_ngrams:
-                    str_ngram = ''.join(ngram)
-                    if str_ngram in ngram_positive_dict:
-                        continue
-                    if str_ngram == str_s_ngram:
-                        ngram_positive_dict[str_ngram] = True
-                        break
-                    else:
-                        if not str_ngram in ngram_negative_dict:
-                            ngram_negative_dict[str_ngram] = True
-                            self.outputList.append(ngram)
-        '''
 
     def run_is_sentence(self):
-        return_Value = False
+        returnValue = False
         for s in self.corpus.sents():
             if self.input_sentence == s:
-                return_Value = True
+                returnValue = True
                 break
-        self.outputList.append(return_Value)
+        self.outputList.append(returnValue)
 
 
 def generate_N_ngrams_of_sentence(corpera, sentence_tokens, resultList):
@@ -101,7 +94,7 @@ def generate_N_ngrams_of_sentence(corpera, sentence_tokens, resultList):
     for i in range(len(sentence_tokens)):
         n = i+1
 
-        ngram =  list(ngrams(sentence_tokens, n))
+        ngram = list(ngrams(sentence_tokens, n))
         N_ngrams.append(ngram)
         for corpus in corpera:
             corpus_thread = CorpusCheckThread(corpus, ngram, resultList, is_sentence=False)
@@ -110,6 +103,10 @@ def generate_N_ngrams_of_sentence(corpera, sentence_tokens, resultList):
 
         for check_threads in threads:
             check_threads.join()
+            add_errors_to_dict(check_threads.ngrams_errors)
+
+        for n_in_ngrams in errors_dict.keys():
+            errors_dict[n_in_ngrams] = list(set(errors_dict[n_in_ngrams]))
 
     return N_ngrams
 
@@ -117,17 +114,24 @@ def set_nltk_data_dir():
 	nltk_dir = os.getcwd() + '/nltk_data'
 	nltk.data.path.append(nltk_dir)
 
+errors_dict = dict()
+def add_errors_to_dict(d):
+    for n_in_ngram, ngrams in d.items():
+        if n_in_ngram not in errors_dict: errors_dict[n_in_ngram] = list()
+        errors_dict[n_in_ngram].extend(ngrams)
+
 def main(inputtext):
-    resultList = []
-    threads = []
     if inputtext !="":
-        userInput = inputtext
+        userInput = inputtext.lower()
     else:
         print("Please give me the sentence you want to get checked:")
-        userInput = input()
+        userInput = input().lower()
 
     set_nltk_data_dir()
 
+    resultList = []
+    threads = []
+    jsonGenerator = JsonGenerator(userInput)
     sentence_tokens = nltk.word_tokenize(userInput)
     corpera = [nltk.corpus.brown, nltk.corpus.masc_tagged]
 
@@ -145,9 +149,12 @@ def main(inputtext):
         return 0
     else:
         resultList = []
+
         generate_N_ngrams_of_sentence(corpera, sentence_tokens, resultList)
-        for result in resultList:
-            print(result)
+        jsonGenerator.generate_json_ngram(errors_dict)
+        jsonGenerator.print_json()
+        jsonGenerator.save()
+
         print("Function of second group will be called")
         return 1
 
