@@ -1,18 +1,47 @@
 #!/usr/bin/python3
 import os
-import zipfile
 import threading
 import nltk
-import sys
 from nltk.util import ngrams
+from jsonGenerator import jsonGenerate
+
 
 class CorpusCheckThread (threading.Thread):
-    def __init__(self, corpus, input_sentence, outputList):
+    def __init__(self, corpus, input_sentence, outputList, is_sentence=True):
         threading.Thread.__init__(self)
         self.corpus = corpus
         self.input_sentence =  input_sentence
         self.outputList = outputList
+        self.is_sentence = is_sentence
+
     def run(self):
+        if self.is_sentence:
+            self.run_is_sentence()
+        else:
+            self.run_is_ngram()
+
+    def run_is_ngram(self):
+        in_ngrams = self.input_sentence
+        ngram_positive_dict = dict()
+        ngram_negative_dict = dict()
+        l = len(in_ngrams[0])
+        for s in self.corpus.sents():
+            s_ngrams = list(ngrams(s, l))
+            for s_ngram in s_ngrams:
+                str_s_ngram = ''.join((s_ngram))
+                for ngram in in_ngrams:
+                    str_ngram = ''.join(ngram)
+                    if str_ngram in ngram_positive_dict:
+                        continue
+                    if str_ngram == str_s_ngram:
+                        ngram_positive_dict[str_ngram] = True
+                        break
+                    else:
+                        if not str_ngram in ngram_negative_dict:
+                            ngram_negative_dict[str_ngram] = True
+                            self.outputList.append(ngram)
+
+    def run_is_sentence(self):
         return_Value = False
         for s in self.corpus.sents():
             if self.input_sentence == s:
@@ -21,12 +50,22 @@ class CorpusCheckThread (threading.Thread):
         self.outputList.append(return_Value)
 
 
-def generate_N_ngrams_of_sentence(word_tokens):
+def generate_N_ngrams_of_sentence(corpera, sentence_tokens, resultList):
     N_ngrams = list()
+    threads = list()
 
-    for i in range(len(word_tokens)):
+    for i in range(len(sentence_tokens)):
         n = i+1
-        N_ngrams.append(ngrams(word_tokens, n))
+
+        ngram =  list(ngrams(sentence_tokens, n))
+        N_ngrams.append(ngram)
+        for corpus in corpera:
+            corpus_thread = CorpusCheckThread(corpus, ngram, resultList, is_sentence=False)
+            corpus_thread.start()
+            threads.append(corpus_thread)
+
+        for check_threads in threads:
+            check_threads.join()
 
     return N_ngrams
 
@@ -61,6 +100,10 @@ def main(inputtext):
         print("Your sentence is correct")
         return 0
     else:
+        resultList = []
+        n_grams = generate_N_ngrams_of_sentence(corpera, sentence_tokens, resultList)
+        for result in resultList:
+            print(result)
         print("Function of second group will be called")
         return 1
 
