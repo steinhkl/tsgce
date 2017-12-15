@@ -15,6 +15,8 @@ class CorpusCheckThread (threading.Thread):
         self.is_sentence = is_sentence
         self.ngrams_errors = dict()
 
+    # Determine the execution flow
+    # Checking sentence or ngrams of a given corpera
     def run(self):
         if self.is_sentence:
             self.run_is_sentence()
@@ -25,6 +27,8 @@ class CorpusCheckThread (threading.Thread):
     # generate n ngram from sentence
     # generate string representation of sentence ngram
     # and compare
+    # return    true: ngram is in sentence
+    #           false: ngram no in sentence
     def check_ngram_in_sentence(self, sentence, str_ngram, n):
         sentence_ngrams = list(ngrams(sentence, n))
 
@@ -36,6 +40,8 @@ class CorpusCheckThread (threading.Thread):
         return False
 
     # check ngram in whole copera (all sentences in corpera)
+    # return    true: ngram is in corpera
+    #           false: ngram no in corpera
     def check_ngram_in_corpera(self, str_ngram):
         n = str_ngram.count('#') + 1
         ret = False
@@ -48,25 +54,26 @@ class CorpusCheckThread (threading.Thread):
 
         return ret
 
+    # iterate through all ngram in input_sentence (in_ngrams)
+    # and compare each tuple of in_grams with each ngram from sentence
+    #  iterate over all ngrams in_sentence: (in_ngram)
+    # generate a string representative for each in_ngram
+    # and compare string representation of in_ngram with
+    # each string representation of corpus_sentence
     def run_is_ngram(self):
         in_ngrams = self.input_sentence
         ngram_positive_dict = dict()
         ngram_negative_dict = dict()
 
-        # iterate through all ngram in input_sentence (in_ngrams)
-        # and compare each tuple of in_grams with each ngram from sentence
-        # iterate over all ngrams in_sentence: (in_ngram)
-        # generate a string representative for each in_ngram
-        # and compare string representation of in_ngram with
-        # each string representation of corpus_sentence
-
         for in_ngram in in_ngrams:
             str_in_ngram = '#'.join(in_ngram)
+
             if str_in_ngram in ngram_negative_dict:
                 continue
 
             if self.check_ngram_in_corpera(str_in_ngram):
                 ngram_positive_dict[str_in_ngram] = True
+
             else:
                 ngram_negative_dict[str_in_ngram] = True
                 n_in_ngram = len(in_ngram)
@@ -78,6 +85,7 @@ class CorpusCheckThread (threading.Thread):
                 self.ngrams_errors[str(n_in_ngram)].append(in_ngram)
                 self.outputList.append(in_ngram)
 
+    # checks input sentence against each sentence in corpus
     def run_is_sentence(self):
         returnValue = False
         for s in self.corpus.sents():
@@ -86,7 +94,9 @@ class CorpusCheckThread (threading.Thread):
                 break
         self.outputList.append(returnValue)
 
-
+# Generates all ngrams from input and,
+# spawns for each corpera, n threads,
+# where n is the number n in ngram (n=number of threads)
 def generate_N_ngrams_of_sentence(corpera, sentence_tokens, resultList):
     N_ngrams = list()
     threads = list()
@@ -110,11 +120,20 @@ def generate_N_ngrams_of_sentence(corpera, sentence_tokens, resultList):
 
     return N_ngrams
 
+# Sets path to nltk project dir
 def set_nltk_data_dir():
 	nltk_dir = os.getcwd() + '/nltk_data'
 	nltk.data.path.append(nltk_dir)
 
+# Contains all "error" ngrams as a key-value pair.
+# Error ngrams are associated with ngrams, which arent found in the corpera.
+# Error ngram dict structure:
+#   key: n in ngram
+#   value:  list of ngrams associated with n
 errors_dict = dict()
+
+# Adds all erros from an given dictonary to error dict.
+# Error dict extends its corresponding ngram list
 def add_errors_to_dict(d):
     for n_in_ngram, ngrams in d.items():
         if n_in_ngram not in errors_dict: errors_dict[n_in_ngram] = list()
