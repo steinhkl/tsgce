@@ -1,0 +1,9 @@
+example-form-field {
+  width: 200px;
+}
+
+mat-form-field.mat-form-field {
+  font-size: 16px;
+}
+
+
