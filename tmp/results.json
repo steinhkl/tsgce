@@ -1,0 +1,96 @@
+{
+    "userInput": "and end is near for us",
+    "ngrams": [
+        {
+            "error_in": 2,
+            "ngram": [
+                [
+                    "near",
+                    "for"
+                ]
+            ]
+        },
+        {
+            "error_in": 3,
+            "ngram": [
+                [
+                    "is",
+                    "near",
+                    "for"
+                ],
+                [
+                    "near",
+                    "for",
+                    "us"
+                ],
+                [
+                    "and",
+                    "end",
+                    "is"
+                ],
+                [
+                    "end",
+                    "is",
+                    "near"
+                ]
+            ]
+        },
+        {
+            "error_in": 4,
+            "ngram": [
+                [
+                    "end",
+                    "is",
+                    "near",
+                    "for"
+                ],
+                [
+                    "is",
+                    "near",
+                    "for",
+                    "us"
+                ],
+                [
+                    "and",
+                    "end",
+                    "is",
+                    "near"
+                ]
+            ]
+        },
+        {
+            "error_in": 5,
+            "ngram": [
+                [
+                    "end",
+                    "is",
+                    "near",
+                    "for",
+                    "us"
+                ],
+                [
+                    "and",
+                    "end",
+                    "is",
+                    "near",
+                    "for"
+                ]
+            ]
+        },
+        {
+            "error_in": 6,
+            "ngram": [
+                [
+                    "and",
+                    "end",
+                    "is",
+                    "near",
+                    "for",
+                    "us"
+                ]
+            ]
+        }
+    ],
+    "tagged": [],
+    "forms": []
+}
