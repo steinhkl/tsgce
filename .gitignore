@@ -1,3 +1,7 @@
 __pycache__
 *.pyc
 google-api-key.txt
+
+
+# Some gitignore for Tobias
+.vscode/
