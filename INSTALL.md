@@ -30,7 +30,7 @@ sudo pip3 install --upgrade pip
 sudo pip3 install --upgrade -r pip-requirements.txt
 ```
 
-Install pattern (development for Python3 Support):
+Install [pattern](https://github.com/clips/pattern) (development for Python3 Support):
 ``` bash
 git clone https://github.com/clips/pattern && cd pattern
 git fetch && git checkout development
@@ -41,13 +41,9 @@ cd ./../
 
 ### Configuration
 
-Modify Google API Key
+Modify [Google API Key](https://console.developers.google.com/apis/)
 ``` bash
-nano google-api-key.txt
-delete the line "!REPLACE THIS LINE WITH YOUR API KEY!"
-insert your key
-save with: ctrl + o
-exit with: ctrl + x
+echo "YOU API KEY HERE" > google-api-key.txt
 ```
 
 ### Testrun

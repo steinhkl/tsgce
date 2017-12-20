@@ -10,11 +10,11 @@ The program is launched by starting "start.py":
 
 ## Installing
 
-See Install instructions in INSTALL.md
+See Install instructions in [the installation Guide](INSTALL.md)
 
 ## Google API key
 
-This Program uses the Google API and requires an API Key. You can create a Project and add an API Key at   https://console.developers.google.com/apis/
+This Program uses the Google API and requires an API Key. You can create a Project and add an API Key at https://console.developers.google.com/apis/
 
 Put the key in google-api-key.txt .
 
