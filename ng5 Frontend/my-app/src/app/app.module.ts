@@ -3,7 +3,6 @@ import {NgModule} from '@angular/core';
 import {HttpClientModule, HttpClientXsrfModule} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import {MatSortModule} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material';
 
 /*
 import {MatInputModule} from '@angular/material';
@@ -25,7 +24,6 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    MatTableDataSource,
     FormsModule,
     MatSortModule,
     HttpClientModule,
