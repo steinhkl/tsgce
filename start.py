@@ -6,6 +6,7 @@ from collections import OrderedDict
 import check_checkedCorpera
 import tagandroll
 import biggercorpora
+import json 
 
 def main():
 
@@ -18,7 +19,14 @@ def main():
     result1 = check_checkedCorpera.main(userInput)
 
     if result1 == 1:
-        jsong2 = tagandroll.main(userInput)
+        jsong2 = {}
+        with open("./tmp/results.json") as jsong1_data:
+            jsong1 = json.load(jsong1_data)
+            jsong2 = tagandroll.main(jsong1)
+        
+        print("______________")
+        print(jsong2)
+        print("______________")
         listofsentences = []
         for sentence in jsong2["forms"]:
             listofsentences.append(sentence["sentence"])
