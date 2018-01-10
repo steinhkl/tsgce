@@ -14,7 +14,7 @@ def retaglist (jsonlist):
     
     for idx, form in enumerate(jsonlist["forms"]):
         #Tag Text
-        taggedtext = nltk.word_tokenize(form["sentence"])
+        taggedtext = nltk.word_tokenize(form["userInput"])
         taggedtext = nltk.pos_tag(taggedtext)
         jsonlist["forms"][idx]["tagged"] = taggedtext
 
@@ -70,10 +70,10 @@ def genlist(jsonsentence):
 
     return jsonsentence
 
-def main(intext):
+def main(injson):
     #Check for missing resources
-    jsonout = {}
-    jsonout["sentence"] = intext
+
+    #injson["sentence"] = injson["userInput"]
     try:
         nltk.data.find("taggers/averaged_perceptron_tagger")
     except:
@@ -82,17 +82,17 @@ def main(intext):
 
     
     #Tag input Text
-    taggedtext = nltk.word_tokenize(intext)
+    taggedtext = nltk.word_tokenize(injson["userInput"])
     taggedtext = nltk.pos_tag(taggedtext)
-    jsonout["tagged"] = taggedtext
+    injson["tagged"] = taggedtext
 
     # Generate variations of sentence
 
-    jsonout["forms"] = genlist(jsonout)
+    injson["forms"] = genlist(injson)
 
     # This goes to next group
     #print(jsonout)
-    return jsonout
+    return injson
 
 
 if __name__ == "__main__":
