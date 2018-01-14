@@ -8,14 +8,9 @@ import tagandroll
 import biggercorpora
 import json 
 
-def main():
+def main(userInput):
 
-    if len(sys.argv) > 1:
-        userInput = sys.argv[1]
-    else:
-        print("Please give me the sentence you want to get checked:")
-        userInput = input()
-
+ 
     result1 = check_checkedCorpera.main(userInput)
 
     if result1 == 1:
@@ -38,7 +33,7 @@ def main():
         # call group3 python program
         listofsentences = biggercorpora.main(listwithoutduplicates)
         print(listofsentences)
-
+        return(listofsentences)
 
 
 if __name__ == "__main__":

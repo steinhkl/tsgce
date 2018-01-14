@@ -1,12 +1,24 @@
 {
-    "userInput": "and end is near for us",
+    "userInput": "this is a good test sentence.",
     "ngrams": [
         {
             "error_in": 2,
             "ngram": [
                 [
-                    "near",
-                    "for"
+                    "test",
+                    "sentence"
+                ],
+                [
+                    "test",
+                    "a"
+                ],
+                [
+                    "good",
+                    "test"
+                ],
+                [
+                    "b",
+                    "c"
                 ]
             ]
         },
@@ -14,24 +26,34 @@
             "error_in": 3,
             "ngram": [
                 [
-                    "is",
-                    "near",
-                    "for"
+                    "good",
+                    "test",
+                    "sentence"
                 ],
                 [
-                    "near",
-                    "for",
-                    "us"
+                    "a",
+                    "b",
+                    "c"
                 ],
                 [
-                    "and",
-                    "end",
-                    "is"
+                    "a",
+                    "good",
+                    "test"
                 ],
                 [
-                    "end",
-                    "is",
-                    "near"
+                    "test",
+                    "sentence",
+                    "."
+                ],
+                [
+                    "b",
+                    "c",
+                    "."
+                ],
+                [
+                    "test",
+                    "a",
+                    "b"
                 ]
             ]
         },
@@ -39,22 +61,40 @@
             "error_in": 4,
             "ngram": [
                 [
-                    "end",
+                    "a",
+                    "b",
+                    "c",
+                    "."
+                ],
+                [
+                    "this",
                     "is",
-                    "near",
-                    "for"
+                    "a",
+                    "good"
+                ],
+                [
+                    "test",
+                    "a",
+                    "b",
+                    "c"
+                ],
+                [
+                    "good",
+                    "test",
+                    "sentence",
+                    "."
                 ],
                 [
                     "is",
-                    "near",
-                    "for",
-                    "us"
+                    "a",
+                    "good",
+                    "test"
                 ],
                 [
-                    "and",
-                    "end",
-                    "is",
-                    "near"
+                    "a",
+                    "good",
+                    "test",
+                    "sentence"
                 ]
             ]
         },
@@ -62,18 +102,32 @@
             "error_in": 5,
             "ngram": [
                 [
-                    "end",
-                    "is",
-                    "near",
-                    "for",
-                    "us"
+                    "test",
+                    "a",
+                    "b",
+                    "c",
+                    "."
                 ],
                 [
-                    "and",
-                    "end",
                     "is",
-                    "near",
-                    "for"
+                    "a",
+                    "good",
+                    "test",
+                    "sentence"
+                ],
+                [
+                    "a",
+                    "good",
+                    "test",
+                    "sentence",
+                    "."
+                ],
+                [
+                    "this",
+                    "is",
+                    "a",
+                    "good",
+                    "test"
                 ]
             ]
         },
@@ -81,12 +135,34 @@
             "error_in": 6,
             "ngram": [
                 [
-                    "and",
-                    "end",
+                    "this",
                     "is",
-                    "near",
-                    "for",
-                    "us"
+                    "a",
+                    "good",
+                    "test",
+                    "sentence"
+                ],
+                [
+                    "is",
+                    "a",
+                    "good",
+                    "test",
+                    "sentence",
+                    "."
+                ]
+            ]
+        },
+        {
+            "error_in": 7,
+            "ngram": [
+                [
+                    "this",
+                    "is",
+                    "a",
+                    "good",
+                    "test",
+                    "sentence",
+                    "."
                 ]
             ]
         }

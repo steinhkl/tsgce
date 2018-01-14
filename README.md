@@ -3,9 +3,21 @@ Tiny Statistical Grammar Checking Engine
 
 ## Usage
 
-The program is launched by starting "start.py":
+To use the Programm you have to run the Webserver and the Frontend.
+Then you go to http://localhost:4200/ and put in your sentence.
+
+### Run Webserver
+
 ``` bash
-./start.py "This is my test sentence."
+./webserver.py
+```
+
+### Run Frontend
+
+``` bash
+cd ng5 Frontend
+cd my-app
+ng serve
 ```
 
 ## Installing

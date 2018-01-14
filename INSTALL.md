@@ -46,9 +46,14 @@ Modify [Google API Key](https://console.developers.google.com/apis/)
 echo "YOU API KEY HERE" > google-api-key.txt
 ```
 
-### Testrun
-
-Run a test with:
+## Web Interface
 ``` bash
-./start.py "I are a test sentence"
-```
+sudo apt-get install nodejs 
+sudo apt-get install npm 
+cd ng5 Frontend
+cd my-app
+sudo npm install
+cd ..
+cd ..
+``` 
+

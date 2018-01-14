@@ -1,0 +1,73 @@
+example-form-field {
+  width: 200px;
+}
+
+mat-form-field.mat-form-field {
+  font-size: 16px;
+}
+
+input.input{
+  width: 500px;
+}
+
+div.sentence{
+  text-align: center;
+}
+
+table.blueTable {
+  border: 1px solid #A4382B;
+  background-color: #EEEEEE;
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+}
+table.blueTable td, table.blueTable th {
+  border: 1px solid #AAAAAA;
+  padding: 3px 2px;
+}
+table.blueTable tbody td {
+  font-size: 13px;
+}
+table.blueTable tr:nth-child(even) {
+  background: #D6D5D4;
+}
+table.blueTable thead {
+  background: #A40000;
+  background: -moz-linear-gradient(top, #bb4040 0%, #ad1919 66%, #A40000 100%);
+  background: -webkit-linear-gradient(top, #bb4040 0%, #ad1919 66%, #A40000 100%);
+  background: linear-gradient(to bottom, #bb4040 0%, #ad1919 66%, #A40000 100%);
+  border-bottom: 2px solid #444444;
+}
+table.blueTable thead th {
+  font-size: 15px;
+  font-weight: bold;
+  color: #FFFFFF;
+  border-left: 2px solid #D0E4F5;
+}
+table.blueTable thead th:first-child {
+  border-left: none;
+}
+
+table.blueTable tfoot {
+  font-size: 14px;
+  font-weight: bold;
+  color: #FFFFFF;
+  background: #F50000;
+  background: -moz-linear-gradient(top, #f74040 0%, #f61919 66%, #F50000 100%);
+  background: -webkit-linear-gradient(top, #f74040 0%, #f61919 66%, #F50000 100%);
+  background: linear-gradient(to bottom, #f74040 0%, #f61919 66%, #F50000 100%);
+  border-top: 2px solid #444444;
+}
+table.blueTable tfoot td {
+  font-size: 14px;
+}
+table.blueTable tfoot .links {
+  text-align: right;
+}
+table.blueTable tfoot .links a{
+  display: inline-block;
+  background: #A43214;
+  color: #FFFFFF;
+  padding: 2px 8px;
+  border-radius: 5px;
+}

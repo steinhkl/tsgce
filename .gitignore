@@ -2,6 +2,11 @@ __pycache__
 *.pyc
 google-api-key.txt
 
-
+"ng5 Frontend/my-app/node_modules"
+ng5 Frontend/my-app/node_modules
+ng5\ Frontend/my-app/node_modules
+"ng5 Frontend/my-app/node_modules/*"
+ng5 Frontend/my-app/node_modules/*
+ng5\ Frontend/my-app/node_modules/*
 # Some gitignore for Tobias
 .vscode/
