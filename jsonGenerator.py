@@ -21,8 +21,8 @@ class JsonGenerator():
     def generate_json_ngram(self, ngrams_dict):
         for n_in_ngram, ngrams in ngrams_dict.items():
            tmp = dict()
-           tmp["error_in"] = int(n_in_ngram)
-           tmp["ngram"] = list(ngrams)
+           tmp["length"] = int(n_in_ngram)
+           tmp["ngram"] = ngrams
            self.__jsonDict["ngrams"].append(tmp)
 
     # Saves JSON as a file in tmp/results.json

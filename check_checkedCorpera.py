@@ -2,9 +2,9 @@
 import os
 import threading
 import nltk
+from collections import namedtuple
 from nltk.util import ngrams
 from jsonGenerator import JsonGenerator
-
 
 class CorpusCheckThread (threading.Thread):
     def __init__(self, corpus, input_sentence, outputList, is_sentence=True):
@@ -65,7 +65,7 @@ class CorpusCheckThread (threading.Thread):
         ngram_positive_dict = dict()
         ngram_negative_dict = dict()
 
-        for in_ngram in in_ngrams:
+        for idx, in_ngram in enumerate(in_ngrams):
             str_in_ngram = '#'.join(in_ngram)
 
             if str_in_ngram in ngram_negative_dict:
@@ -81,9 +81,13 @@ class CorpusCheckThread (threading.Thread):
 
                 if not key in self.ngrams_errors:
                     self.ngrams_errors[key] = list()
-
-                self.ngrams_errors[str(n_in_ngram)].append(in_ngram)
+                
+                tmp = dict()
+                tmp["error_at"] = idx
+                tmp["ngram"] = in_ngram
+                self.ngrams_errors[str(n_in_ngram)].append(tmp)
                 self.outputList.append(in_ngram)
+
 
     # checks input sentence against each sentence in corpus
     def run_is_sentence(self):
@@ -116,7 +120,7 @@ def generate_N_ngrams_of_sentence(corpera, sentence_tokens, resultList):
             add_errors_to_dict(check_threads.ngrams_errors)
 
         for n_in_ngrams in errors_dict.keys():
-            errors_dict[n_in_ngrams] = list(set(errors_dict[n_in_ngrams]))
+            errors_dict[n_in_ngrams] = errors_dict[n_in_ngrams]
 
     return N_ngrams
 
@@ -138,6 +142,18 @@ def add_errors_to_dict(d):
     for n_in_ngram, ngrams in d.items():
         if n_in_ngram not in errors_dict: errors_dict[n_in_ngram] = list()
         errors_dict[n_in_ngram].extend(ngrams)
+
+#Removes the duplicates which were created due to the using of threads
+def remove_duplicates(errorsDict):
+    for key in errorsDict:
+        new_l = []
+        seen =[]
+        for d in errorsDict.get(key):
+            error_at = d.get('error_at')
+            if error_at not in seen:
+                seen.append(error_at)
+                new_l.append(d)
+        errorsDict[key]=new_l
 
 def main(inputtext):
     if inputtext !="":
@@ -170,6 +186,8 @@ def main(inputtext):
         resultList = []
 
         generate_N_ngrams_of_sentence(corpera, sentence_tokens, resultList)
+        remove_duplicates(errors_dict)
+        print(errors_dict)
         jsonGenerator.generate_json_ngram(errors_dict)
         jsonGenerator.print_json()
         jsonGenerator.save()
