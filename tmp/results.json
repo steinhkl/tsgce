@@ -1,172 +1,61 @@
 {
-    "userInput": "this is a good test sentence.",
+    "userInput": "i the sun like",
+    "forms": [],
     "ngrams": [
         {
-            "error_in": 2,
+            "length": 3,
             "ngram": [
-                [
-                    "test",
-                    "sentence"
-                ],
-                [
-                    "test",
-                    "a"
-                ],
-                [
-                    "good",
-                    "test"
-                ],
-                [
-                    "b",
-                    "c"
-                ]
+                {
+                    "error_at": 0,
+                    "ngram": [
+                        "i",
+                        "the",
+                        "sun"
+                    ]
+                },
+                {
+                    "error_at": 1,
+                    "ngram": [
+                        "the",
+                        "sun",
+                        "like"
+                    ]
+                }
             ]
         },
         {
-            "error_in": 3,
+            "length": 4,
             "ngram": [
-                [
-                    "good",
-                    "test",
-                    "sentence"
-                ],
-                [
-                    "a",
-                    "b",
-                    "c"
-                ],
-                [
-                    "a",
-                    "good",
-                    "test"
-                ],
-                [
-                    "test",
-                    "sentence",
-                    "."
-                ],
-                [
-                    "b",
-                    "c",
-                    "."
-                ],
-                [
-                    "test",
-                    "a",
-                    "b"
-                ]
+                {
+                    "error_at": 0,
+                    "ngram": [
+                        "i",
+                        "the",
+                        "sun",
+                        "like"
+                    ]
+                }
             ]
         },
         {
-            "error_in": 4,
+            "length": 2,
             "ngram": [
-                [
-                    "a",
-                    "b",
-                    "c",
-                    "."
-                ],
-                [
-                    "this",
-                    "is",
-                    "a",
-                    "good"
-                ],
-                [
-                    "test",
-                    "a",
-                    "b",
-                    "c"
-                ],
-                [
-                    "good",
-                    "test",
-                    "sentence",
-                    "."
-                ],
-                [
-                    "is",
-                    "a",
-                    "good",
-                    "test"
-                ],
-                [
-                    "a",
-                    "good",
-                    "test",
-                    "sentence"
-                ]
-            ]
-        },
-        {
-            "error_in": 5,
-            "ngram": [
-                [
-                    "test",
-                    "a",
-                    "b",
-                    "c",
-                    "."
-                ],
-                [
-                    "is",
-                    "a",
-                    "good",
-                    "test",
-                    "sentence"
-                ],
-                [
-                    "a",
-                    "good",
-                    "test",
-                    "sentence",
-                    "."
-                ],
-                [
-                    "this",
-                    "is",
-                    "a",
-                    "good",
-                    "test"
-                ]
-            ]
-        },
-        {
-            "error_in": 6,
-            "ngram": [
-                [
-                    "this",
-                    "is",
-                    "a",
-                    "good",
-                    "test",
-                    "sentence"
-                ],
-                [
-                    "is",
-                    "a",
-                    "good",
-                    "test",
-                    "sentence",
-                    "."
-                ]
-            ]
-        },
-        {
-            "error_in": 7,
-            "ngram": [
-                [
-                    "this",
-                    "is",
-                    "a",
-                    "good",
-                    "test",
-                    "sentence",
-                    "."
-                ]
+                {
+                    "error_at": 0,
+                    "ngram": [
+                        "i",
+                        "the"
+                    ]
+                },
+                {
+                    "error_at": 2,
+                    "ngram": [
+                        "sun",
+                        "like"
+                    ]
+                }
             ]
         }
     ],
-    "tagged": [],
-    "forms": []
+    "tagged": []
 }

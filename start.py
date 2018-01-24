@@ -9,10 +9,14 @@ import biggercorpora
 import json 
 
 def main(userInput):
-
+    if userInput !="":
+        userInput = userInput.lower()
+    else:
+        print("Please give me the sentence you want to get checked:")
+        userInput = input().lower()
  
     result1 = check_checkedCorpera.main(userInput)
-
+    result1 = 1
     if result1 == 1:
         jsong2 = {}
         with open("./tmp/results.json") as jsong1_data:
@@ -30,6 +34,7 @@ def main(userInput):
         # remove duplicates but keep order
         # source https://stackoverflow.com/questions/7961363/removing-duplicates-in-lists
         listwithoutduplicates = OrderedDict((x, True) for x in listofsentences).keys()
+        print(listwithoutduplicates)
         # call group3 python program
         listofsentences = biggercorpora.main(listwithoutduplicates)
         print(listofsentences)
@@ -37,4 +42,4 @@ def main(userInput):
 
 
 if __name__ == "__main__":
-    main()
+    main("")
