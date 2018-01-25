@@ -8,10 +8,8 @@ import tagandroll
 import biggercorpora
 import json
 
-def main():
+def main(userInput):
 
-    if len(sys.argv) > 1:
-        userInput = sys.argv[1]
     if userInput !="":
         userInput = userInput.lower()
     else:
@@ -19,7 +17,7 @@ def main():
         userInput = input().lower()
 
     #TODO: Clean up this mess...
-    
+
 
     result1 = check_checkedCorpera.main(userInput)
     if result1 == 1:
@@ -34,4 +32,6 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    if len(sys.argv) > 1:
+        userInput = sys.argv[1]
+    main(userInput)
