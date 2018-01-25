@@ -114,7 +114,9 @@ def permutengrams(jsonsentence):
 
                     tmp_tok_sent[i] = swappedword
                     i += 1
-                tmp_tok_sent.extend(".")
+                if punc:    
+                    tmp_tok_sent.extend(".")
+                
                 outlist.extend([{"sentence":arrayToSentence(tmp_tok_sent)}])
 
     return outlist
