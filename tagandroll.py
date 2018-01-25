@@ -93,6 +93,12 @@ def permutengrams(jsonsentence):
         # For Every Ngram in Ngramsize
         for ngram in ngramsize["ngram"]:
             #Permute List
+            punc = False
+            if ngram[-1] == ".":
+                #Permute all but \.
+                punc = True
+                ngram = ngram[:-1]
+
             permOfNgram = list(itertools.permutations(list(ngram["ngram"])))
 
             #for every created permutation create the new sentence
@@ -108,7 +114,7 @@ def permutengrams(jsonsentence):
 
                     tmp_tok_sent[i] = swappedword
                     i += 1
-
+                tmp_tok_sent.extend(".")
                 outlist.extend([{"sentence":arrayToSentence(tmp_tok_sent)}])
 
     return outlist
@@ -155,4 +161,5 @@ def main(injson):
 
 
 if __name__ == "__main__":
+    inputtext = ""
     main(inputtext)

@@ -1,61 +1,129 @@
 {
-    "userInput": "i the sun like",
+    "userInput": "this are a test sentence.",
     "forms": [],
+    "tagged": [],
     "ngrams": [
         {
-            "length": 3,
             "ngram": [
                 {
-                    "error_at": 0,
                     "ngram": [
-                        "i",
-                        "the",
-                        "sun"
-                    ]
+                        "this",
+                        "are",
+                        "a",
+                        "test",
+                        "sentence"
+                    ],
+                    "error_at": 0
                 },
                 {
-                    "error_at": 1,
                     "ngram": [
-                        "the",
-                        "sun",
-                        "like"
-                    ]
+                        "are",
+                        "a",
+                        "test",
+                        "sentence",
+                        "."
+                    ],
+                    "error_at": 1
                 }
-            ]
+            ],
+            "length": 5
         },
         {
-            "length": 4,
             "ngram": [
                 {
-                    "error_at": 0,
                     "ngram": [
-                        "i",
-                        "the",
-                        "sun",
-                        "like"
-                    ]
-                }
-            ]
-        },
-        {
-            "length": 2,
-            "ngram": [
-                {
-                    "error_at": 0,
-                    "ngram": [
-                        "i",
-                        "the"
-                    ]
+                        "this",
+                        "are",
+                        "a"
+                    ],
+                    "error_at": 0
                 },
                 {
-                    "error_at": 2,
                     "ngram": [
-                        "sun",
-                        "like"
-                    ]
+                        "are",
+                        "a",
+                        "test"
+                    ],
+                    "error_at": 1
+                },
+                {
+                    "ngram": [
+                        "a",
+                        "test",
+                        "sentence"
+                    ],
+                    "error_at": 2
+                },
+                {
+                    "ngram": [
+                        "test",
+                        "sentence",
+                        "."
+                    ],
+                    "error_at": 3
                 }
-            ]
+            ],
+            "length": 3
+        },
+        {
+            "ngram": [
+                {
+                    "ngram": [
+                        "this",
+                        "are",
+                        "a",
+                        "test"
+                    ],
+                    "error_at": 0
+                },
+                {
+                    "ngram": [
+                        "are",
+                        "a",
+                        "test",
+                        "sentence"
+                    ],
+                    "error_at": 1
+                },
+                {
+                    "ngram": [
+                        "a",
+                        "test",
+                        "sentence",
+                        "."
+                    ],
+                    "error_at": 2
+                }
+            ],
+            "length": 4
+        },
+        {
+            "ngram": [
+                {
+                    "ngram": [
+                        "this",
+                        "are",
+                        "a",
+                        "test",
+                        "sentence",
+                        "."
+                    ],
+                    "error_at": 0
+                }
+            ],
+            "length": 6
+        },
+        {
+            "ngram": [
+                {
+                    "ngram": [
+                        "test",
+                        "sentence"
+                    ],
+                    "error_at": 3
+                }
+            ],
+            "length": 2
         }
-    ],
-    "tagged": []
+    ]
 }
