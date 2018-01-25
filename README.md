@@ -36,3 +36,16 @@ I am not sure if you need to create your own CSE but I don't think so.
 However: You can create a Custom Search Engine at https://cse.google.com/   
 After adding it make sure to select "Search the entire web but emphasize included sites" for the Option "Sites to search"  
 You can then modify biggercorpora.py  line 48.
+
+##Frontend Fixes
+If ng serve is not working try
+npm update -g @angular/cli
+
+if its still not working try to install nodjs via package-manager
+curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+sudo apt-get install -y nodejs
+and do npm update -g @angular/cli again
+ 
+
+
+
