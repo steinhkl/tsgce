@@ -28,7 +28,7 @@ def main(userInput):
 
         result = biggercorpora.main(json2)
         print(result)
-
+        return result
 
 
 if __name__ == "__main__":
