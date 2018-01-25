@@ -48,12 +48,9 @@ echo "YOU API KEY HERE" > google-api-key.txt
 
 ## Web Interface
 ``` bash
-sudo apt-get install nodejs 
-sudo apt-get install npm 
-cd ng5 Frontend
-cd my-app
+sudo apt-get install nodejs npm
+cd ng5 Frontend/my-app/
 sudo npm install
-cd ..
-cd ..
+sudo npm install -g @angular/cli
 ``` 
 
