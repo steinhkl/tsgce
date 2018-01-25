@@ -6,40 +6,32 @@ from collections import OrderedDict
 import check_checkedCorpera
 import tagandroll
 import biggercorpora
-import json 
+import json
 
-def main(userInput):
+def main():
+
+    if len(sys.argv) > 1:
+        userInput = sys.argv[1]
     if userInput !="":
         userInput = userInput.lower()
     else:
         print("Please give me the sentence you want to get checked:")
         userInput = input().lower()
- 
-    result1 = check_checkedCorpera.main(userInput)
-    result1 = 1
-    if result1 == 1:
-        jsong2 = {}
-        with open("./tmp/results.json") as jsong1_data:
-            jsong1 = json.load(jsong1_data)
-            jsong2 = tagandroll.main(jsong1)
-        
-        print("______________")
-        print(jsong2)
-        print("______________")
-        listofsentences = []
-        for sentence in jsong2["forms"]:
-            listofsentences.append(sentence["sentence"])
 
-        # start group 3
-        # remove duplicates but keep order
-        # source https://stackoverflow.com/questions/7961363/removing-duplicates-in-lists
-        listwithoutduplicates = OrderedDict((x, True) for x in listofsentences).keys()
-        print(listwithoutduplicates)
-        # call group3 python program
-        listofsentences = biggercorpora.main(listwithoutduplicates)
-        print(listofsentences)
-        return(listofsentences)
+    #TODO: Clean up this mess...
+    
+
+    result1 = check_checkedCorpera.main(userInput)
+    if result1 == 1:
+        json2 = {}
+        with open("./tmp/results.json") as json1_data:
+            json1 = json.load(json1_data)
+            json2 = tagandroll.main(json1)
+
+        result = biggercorpora.main(json2)
+        print(result)
+
 
 
 if __name__ == "__main__":
-    main("")
+    main()

@@ -51,8 +51,16 @@ def queryGoogleCSEApi(searchstring, devKey):
     return (res.get('searchInformation').get('totalResults'))
     pass
 
+def savequeryresults(datastruct, checkedsentence, typeofhit , hits):
+    # search complete structure for identical sentences and save results
+    for sentence in datastruct['forms']:
+        if sentence['sentence'] == checkedsentence:
+            sentence[typeofhit] = hits
+            pass
+        pass
+    pass
 
-def main(listofsentences):
+def main(datastruct):
     # create a dictionary for the results:
     parsehtmlresults = {}
     queryGoogleAPIresults = {}
@@ -61,30 +69,31 @@ def main(listofsentences):
     # Check wether we have reached API Calllimit.
     APILimit = GoogleAPILimit(devKey)
     HTMLLimit = GoogleParseLimit()
+    print("I can make HTML Parses: " + str(HTMLLimit))
+    print("I can make API Calls: " + str(APILimit))
 
     # here we work on our sentences
-    for sentence in listofsentences:
+    for sentence in datastruct['forms']:
         # make it quoted for exact matching search results.
-        sentence = '"'+sentence+'"'
-        # send all senteces to google and parse resulting HTML file
-        if HTMLLimit:
-            parsehtmlresults[sentence] = parsegooglehtml(sentence)
-            pass
-        if APILimit:
-            queryGoogleAPIresults[sentence] = queryGoogleCSEApi(sentence, devKey)
-            pass
+        searchquery = '"'+sentence['sentence']+'"'
+
+        if ('parsehits' in sentence) == False:
+            # send all senteces to google and parse resulting HTML file
+            if HTMLLimit:
+                parsehits = parsegooglehtml(searchquery)
+                savequeryresults(datastruct, sentence['sentence'], 'parsehits', parsehits)
+                pass
         pass
-
-    # Order by Number of results.
-    parsehtmlresults = sorted(parsehtmlresults.items(), key=lambda x:x[1], reverse=True)
-    #TODO: This sorting does not seem to work yet. But we probably wont need it anymore once we have a data structure.
-    queryGoogleAPIresults = sorted(queryGoogleAPIresults.items(), key=lambda x:x[1], reverse=True)
-
-    # TODO: Add Results to JSON Data.
-    # THIS IS WHERE I WOULD PUT MY JSON IF I HAD ANY!
+        if ('APIhits' in sentence) == False:
+            if APILimit:
+                apihits = queryGoogleCSEApi(searchquery, devKey)
+                savequeryresults(datastruct, sentence['sentence'], 'APIhits', apihits)
+                pass
+        pass
+    pass
 
     # return sorted key:value pairs
-    return parsehtmlresults
+    return datastruct
 
 
 if __name__ == "__main__":

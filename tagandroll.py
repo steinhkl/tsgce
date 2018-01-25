@@ -10,7 +10,7 @@ formaliases = ["inf", "1sg", "2sg", "3sg", "pl", "part", "1sgp", "2sgp", "3sgp",
 
 
 def retaglist (jsonlist):
-    
+
     for idx, form in enumerate(jsonlist["forms"]):
         #Tag Text
         taggedtext = nltk.word_tokenize(form["userInput"])
@@ -83,9 +83,9 @@ def permutengrams(jsonsentence):
     # Save original tokenized sentence
     for token in jsonsentence["tagged"]:
         tokenized_sentence.extend([token[0]])
-    
+
     # For every Ngram size
-    
+
     for ngramsize in jsonsentence["ngrams"]:
         if ngramsize["length"] > 5:
             continue
@@ -94,35 +94,37 @@ def permutengrams(jsonsentence):
         for ngram in ngramsize["ngram"]:
             #Permute List
             permOfNgram = list(itertools.permutations(list(ngram["ngram"])))
-            
+
             #for every created permutation create the new sentence
             for perm in permOfNgram:
                 i = ngram["error_at"]
                 tmp_tok_sent = []
-                
+
                 for token in jsonsentence["tagged"]:
                     tmp_tok_sent.extend([token[0]])
-               
+
                 # For every word in permutation
                 for swappedword in perm:
-                    
+
                     tmp_tok_sent[i] = swappedword
                     i += 1
 
                 outlist.extend([{"sentence":arrayToSentence(tmp_tok_sent)}])
-    
+
     return outlist
 
-            
+
 
 # This will generate this list of sentences (curently only changed verbs. Will do other stuff later)
 def genlist(jsonsentence):
     out ={}
     listofsentences = []
-    out  = inflictverbs(jsonsentence) 
+    out  = inflictverbs(jsonsentence)
 
-    #Permutate Ngrams
-    out.extend(permutengrams(jsonsentence))
+    # Permutate Ngrams
+    # TODO: This should be seperate in out json if you ask me.
+    # disabled (for now) for performance and API Limit reasons.
+    # out.extend(permutengrams(jsonsentence))
     return out
 
 def main(injson):
@@ -135,19 +137,20 @@ def main(injson):
         print("Loading missing libraries.")
         nltk.download("averaged_perceptron_tagger")
 
-    
-    #Tag input Text
+
+    # Tag input Text
     taggedtext = nltk.word_tokenize(injson["userInput"])
     taggedtext = nltk.pos_tag(taggedtext)
     injson["tagged"] = taggedtext
-    
+
     # Generate variations of sentence
 
     injson["forms"] = genlist(injson)
 
-    
+
     # This goes to next group
-    #print(jsonout)
+    # DEBUG: Uncomment to print JSON of Group 2
+    # print(jsonout)
     return injson
 
 

@@ -81,7 +81,7 @@ class CorpusCheckThread (threading.Thread):
 
                 if not key in self.ngrams_errors:
                     self.ngrams_errors[key] = list()
-                
+
                 tmp = dict()
                 tmp["error_at"] = idx
                 tmp["ngram"] = in_ngram
@@ -170,7 +170,7 @@ def main(inputtext):
     sentence_tokens = nltk.word_tokenize(userInput)
     corpera = [nltk.corpus.brown, nltk.corpus.masc_tagged]
 
-    print("Performing the check")
+    print("Performing the initial Error check")
     for corpus in corpera:
         corpus_thread = CorpusCheckThread(corpus, sentence_tokens, resultList)
         corpus_thread.start()
@@ -189,10 +189,11 @@ def main(inputtext):
         remove_duplicates(errors_dict)
         print(errors_dict)
         jsonGenerator.generate_json_ngram(errors_dict)
-        jsonGenerator.print_json()
+        # DEBUG: Uncomment to print JSON after Group 1
+        # jsonGenerator.print_json()
         jsonGenerator.save()
 
-        print("Function of second group will be called")
+        print("I found an Error! Function of second group will be called")
         return 1
 
 if __name__ == "__main__":
