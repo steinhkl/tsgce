@@ -3,6 +3,8 @@
 import nltk
 import itertools
 import json
+import numpy
+from collections import OrderedDict
 from pattern.en import conjugate
 
 # Refer to https://www.clips.uantwerpen.be/pages/pattern-en#conjugation
@@ -87,39 +89,42 @@ def permutengrams(jsonsentence):
     # For every Ngram size
 
     for ngramsize in jsonsentence["ngrams"]:
-        if ngramsize["length"] > 5:
-            continue
+        #If length of ngram is 3 
+        if ngramsize["length"] == 3 :
 
-        # For Every Ngram in Ngramsize
-        for ngram in ngramsize["ngram"]:
-            #Permute List
-            punc = False
-            if ngram["ngram"][-1] == ".":
-                #Permute all but \.
-                punc = True
-                ngram["ngram"] = ngram["ngram"][:-1]
+            # For Every Ngram in Ngramsize
+            for ngram in ngramsize["ngram"]:
+                #Permute List
+                punc = False
+                if ngram["ngram"][-1] == ".":
+                    #Permute all but \.
+                    punc = True
+                    ngram["ngram"] = ngram["ngram"][:-1]
+                    
 
-            permOfNgram = list(itertools.permutations(list(ngram["ngram"])))
+                permOfNgram = list(itertools.permutations(list(ngram["ngram"])))
 
-            #for every created permutation create the new sentence
-            for perm in permOfNgram:
-                i = ngram["error_at"]
-                tmp_tok_sent = []
+                #for every created permutation create the new sentence
+                for perm in permOfNgram:
+                    i = ngram["error_at"]
+                    tmp_tok_sent = []
 
-                for token in jsonsentence["tagged"]:
-                    tmp_tok_sent.extend([token[0]])
+                    for token in jsonsentence["tagged"]:
+                        tmp_tok_sent.extend([token[0]])
 
-                # For every word in permutation
-                for swappedword in perm:
+                    # For every word in permutation
+                    for swappedword in perm:
 
-                    tmp_tok_sent[i] = swappedword
-                    i += 1
-                if punc:    
-                    tmp_tok_sent.extend(".")
-                
-                outlist.extend([{"sentence":arrayToSentence(tmp_tok_sent)}])
-
-    return outlist
+                        tmp_tok_sent[i] = swappedword
+                        i += 1
+                    if punc:    
+                        tmp_tok_sent.extend(".")
+                    
+                    outlist.extend([{"sentence":arrayToSentence(tmp_tok_sent)}])
+    #choose 5 random permutations
+    outlist = [i for n, i in enumerate(outlist) if i not in outlist[n + 1:]]
+    outlist = numpy.random.choice(outlist,5,replace="false")
+    return list(outlist)
 
 
 
@@ -132,7 +137,7 @@ def genlist(jsonsentence):
     # Permutate Ngrams
     # TODO: This should be seperate in out json if you ask me.
     # disabled (for now) for performance and API Limit reasons.
-    # out.extend(permutengrams(jsonsentence))
+    out.extend(permutengrams(jsonsentence))
     return out
 
 def main(injson):
