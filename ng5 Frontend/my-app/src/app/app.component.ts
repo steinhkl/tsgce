@@ -49,22 +49,26 @@ export class AppComponent implements OnInit {
           const fields = data.split('Content-Type: application/json');
           console.log("filed 1 fom data")
           console.log(fields[1]);
-          console.log(decodeURI(fields[1]));
+
+
+          ////console.log(decodeURI(fields[1]));
          // fields[1]= fields[1].replace("\\\"","")
-          fields[1]=  fields[1].replace(new RegExp(/\"/, 'g'), "");
-          fields[1]=  fields[1].replace(new RegExp(/\\/, 'g'), "\"");
-          fields[1] = fields[1].replace(/(\r\n|\n|\r)/gm,"");
+         //// fields[1]=  fields[1].replace(new RegExp(/\"/, 'g'), "");
+         //// fields[1]=  fields[1].replace(new RegExp(/\\/, 'g'), "\"");
+         ///// fields[1] = fields[1].replace(/(\r\n|\n|\r)/gm,"");
           //fields[1]= "{ \"forms\":"+ fields[1]+"}";
-          console.log(fields[1]);
+         //// console.log(fields[1]);
 
           //[["\"this is a test sentence\"", 17300], ["\"this be a test sentence\"", 0], ["\"this am a test sentence\"", 0], ["\"this are a test sentence\"", 0], ["\"this being a test sentence\"", 0], ["\"this was a test sentence\"", 0], ["\"this were a test sentence\"", 0], ["\"this been a test sentence\"", 0]]
           //const fields1 = fields[1];
           const obj = JSON.parse(fields[1].toString());
           console.log("oject")
           console.log(obj);
+	
+	console.log("only forms");
+	console.log(obj["forms"]);
 
-
-          this.sentenceModels = obj;
+          this.sentenceModels = obj["forms"];
 
 	//this.sentenceModels = new this.sentenceModels[10];
 		console.log(obj[0][0]);
