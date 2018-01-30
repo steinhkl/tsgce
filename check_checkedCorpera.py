@@ -105,9 +105,11 @@ def generate_N_ngrams_of_sentence(corpera, sentence_tokens, resultList):
     N_ngrams = list()
     threads = list()
 
-    for i in range(len(sentence_tokens)):
-        n = i+1
-
+    # Only do n = 3
+    #for i in range(len(sentence_tokens)):
+    #    n = i+1
+    if len(sentence_tokens) >= 3:
+        n = 3
         ngram = list(ngrams(sentence_tokens, n))
         N_ngrams.append(ngram)
         for corpus in corpera:
