@@ -34,4 +34,6 @@ def main(userInput):
 if __name__ == "__main__":
     if len(sys.argv) > 1:
         userInput = sys.argv[1]
+    else:
+        userInput = ""
     main(userInput)
