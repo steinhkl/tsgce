@@ -1,42 +1,8 @@
 {
-    "forms": [],
+    "tagged": [],
     "ngrams": [
         {
-            "ngram": [
-                {
-                    "ngram": [
-                        "test",
-                        "sentence"
-                    ],
-                    "error_at": 3
-                }
-            ],
-            "length": 2
-        },
-        {
-            "ngram": [
-                {
-                    "ngram": [
-                        "this",
-                        "are",
-                        "a",
-                        "test"
-                    ],
-                    "error_at": 0
-                },
-                {
-                    "ngram": [
-                        "are",
-                        "a",
-                        "test",
-                        "sentence"
-                    ],
-                    "error_at": 1
-                }
-            ],
-            "length": 4
-        },
-        {
+            "length": 3,
             "ngram": [
                 {
                     "ngram": [
@@ -61,11 +27,67 @@
                         "sentence"
                     ],
                     "error_at": 2
+                },
+                {
+                    "ngram": [
+                        "test",
+                        "sentence",
+                        "."
+                    ],
+                    "error_at": 3
                 }
-            ],
-            "length": 3
+            ]
         },
         {
+            "length": 4,
+            "ngram": [
+                {
+                    "ngram": [
+                        "this",
+                        "are",
+                        "a",
+                        "test"
+                    ],
+                    "error_at": 0
+                },
+                {
+                    "ngram": [
+                        "are",
+                        "a",
+                        "test",
+                        "sentence"
+                    ],
+                    "error_at": 1
+                },
+                {
+                    "ngram": [
+                        "a",
+                        "test",
+                        "sentence",
+                        "."
+                    ],
+                    "error_at": 2
+                }
+            ]
+        },
+        {
+            "length": 6,
+            "ngram": [
+                {
+                    "ngram": [
+                        "this",
+                        "are",
+                        "a",
+                        "test",
+                        "sentence",
+                        "."
+                    ],
+                    "error_at": 0
+                }
+            ]
+        },
+        {
+            "length": 5,
             "ngram": [
                 {
                     "ngram": [
@@ -76,11 +98,32 @@
                         "sentence"
                     ],
                     "error_at": 0
+                },
+                {
+                    "ngram": [
+                        "are",
+                        "a",
+                        "test",
+                        "sentence",
+                        "."
+                    ],
+                    "error_at": 1
                 }
-            ],
-            "length": 5
+            ]
+        },
+        {
+            "length": 2,
+            "ngram": [
+                {
+                    "ngram": [
+                        "test",
+                        "sentence"
+                    ],
+                    "error_at": 3
+                }
+            ]
         }
     ],
-    "userInput": "this are a test sentence",
-    "tagged": []
+    "userInput": "this are a test sentence.",
+    "forms": []
 }
