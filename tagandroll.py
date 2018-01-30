@@ -94,10 +94,10 @@ def permutengrams(jsonsentence):
         for ngram in ngramsize["ngram"]:
             #Permute List
             punc = False
-            if ngram[-1] == ".":
+            if ngram["ngram"][-1] == ".":
                 #Permute all but \.
                 punc = True
-                ngram = ngram[:-1]
+                ngram["ngram"] = ngram["ngram"][:-1]
 
             permOfNgram = list(itertools.permutations(list(ngram["ngram"])))
 

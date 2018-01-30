@@ -1,8 +1,18 @@
 {
-    "userInput": "this are a test sentence.",
     "forms": [],
-    "tagged": [],
     "ngrams": [
+        {
+            "ngram": [
+                {
+                    "ngram": [
+                        "test",
+                        "sentence"
+                    ],
+                    "error_at": 3
+                }
+            ],
+            "length": 2
+        },
         {
             "ngram": [
                 {
@@ -10,8 +20,7 @@
                         "this",
                         "are",
                         "a",
-                        "test",
-                        "sentence"
+                        "test"
                     ],
                     "error_at": 0
                 },
@@ -20,13 +29,12 @@
                         "are",
                         "a",
                         "test",
-                        "sentence",
-                        "."
+                        "sentence"
                     ],
                     "error_at": 1
                 }
             ],
-            "length": 5
+            "length": 4
         },
         {
             "ngram": [
@@ -53,14 +61,6 @@
                         "sentence"
                     ],
                     "error_at": 2
-                },
-                {
-                    "ngram": [
-                        "test",
-                        "sentence",
-                        "."
-                    ],
-                    "error_at": 3
                 }
             ],
             "length": 3
@@ -72,58 +72,15 @@
                         "this",
                         "are",
                         "a",
-                        "test"
-                    ],
-                    "error_at": 0
-                },
-                {
-                    "ngram": [
-                        "are",
-                        "a",
                         "test",
                         "sentence"
-                    ],
-                    "error_at": 1
-                },
-                {
-                    "ngram": [
-                        "a",
-                        "test",
-                        "sentence",
-                        "."
-                    ],
-                    "error_at": 2
-                }
-            ],
-            "length": 4
-        },
-        {
-            "ngram": [
-                {
-                    "ngram": [
-                        "this",
-                        "are",
-                        "a",
-                        "test",
-                        "sentence",
-                        "."
                     ],
                     "error_at": 0
                 }
             ],
-            "length": 6
-        },
-        {
-            "ngram": [
-                {
-                    "ngram": [
-                        "test",
-                        "sentence"
-                    ],
-                    "error_at": 3
-                }
-            ],
-            "length": 2
+            "length": 5
         }
-    ]
+    ],
+    "userInput": "this are a test sentence",
+    "tagged": []
 }

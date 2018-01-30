@@ -19,14 +19,14 @@ def main(userInput):
     #TODO: Clean up this mess...
 
 
-    result1 = check_checkedCorpera.main(userInput)
-    
+    #result1 = check_checkedCorpera.main(userInput)
+    result1 =1
     if result1 == 1:
         json2 = {}
         with open("./tmp/results.json") as json1_data:
             json1 = json.load(json1_data)
             json2 = tagandroll.main(json1)
-        
+        print (json2)   
         result = biggercorpora.main(json2)
         print(result)
         return result
