@@ -3,7 +3,7 @@
   <h1>
     Welcome to {{ title }}!
   </h1>
-  
+
 <img  width="300" src="assets/images/Hda_logo.svg.png">
 </div>
 
@@ -26,13 +26,17 @@
     <th>#</th>
     <th>Sentence</th>
    <!-- <th>Corporahits</th>-->
-    <th>Googlehits</th>
+    <th>API hits</th>
+    <th>Parse hits</th>
+
   </tr>
   <tr *ngFor="let sentenceModel of sentenceModels; let i = index">
     <td>{{i + 1}}</td>
     <td>{{sentenceModel.sentence}}</td>
    <!-- <td>{{sentenceModel.corporahits}}</td>-->
-    <td>{{sentenceModel.googlehits}}</td>
+    <td>{{sentenceModel.APIhits}}</td>
+    <td>{{sentenceModel.parsehits}}</td>
+
   </tr>
 </table>
 

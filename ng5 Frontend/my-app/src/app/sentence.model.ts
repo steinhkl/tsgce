@@ -1,6 +1,7 @@
 export class SentenceModel {
   constructor(public sentence: string,
-              public googlehits: number,
+              public APIhits: number,
+              public parsehits: number
              ) {
   }
 
